@@ -1,8 +1,8 @@
 type TLoadingIcon = {
-	classes: string,
+	classes: string
 };
 
-export const LoadingIcon = ({ classes }: TLoadingIcon) => {
+export const LoadingIcon: React.FC<TLoadingIcon> = ({ classes }) => {
 	return (
 		<svg
 			className={classes}
@@ -17,15 +17,15 @@ export const LoadingIcon = ({ classes }: TLoadingIcon) => {
 			viewBox="0 0 100 100"
 			enableBackground="new 0 0 0 0"
 			xmlSpace="preserve">
-			<circle fill="none" stroke="#344155" strokeWidth="4" cx="50" cy="50" r="44" style={{opacity:0.5}}/>
+			<circle fill="none" stroke="#344155" strokeWidth="4" cx="50" cy="50" r="44" style={{ opacity: 0.5 }}/>
 			<circle fill="#344155" stroke="#344155" strokeWidth="3" cx="8" cy="54" r="6" >
 				<animateTransform
-				attributeName="transform"
-				dur="2s"
-				type="rotate"
-				from="0 50 48"
-				to="360 50 52"
-				repeatCount="indefinite" />
+					attributeName="transform"
+					dur="2s"
+					type="rotate"
+					from="0 50 48"
+					to="360 50 52"
+					repeatCount="indefinite" />
 			</circle>
 		</svg>
 	);

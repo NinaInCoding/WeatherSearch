@@ -1,0 +1,1 @@
+export { SearchHints } from './SearchHints';

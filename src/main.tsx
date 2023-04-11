@@ -1,8 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
-import { WeatherContext, CityContext } from './components/context/context';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './index.css';
+import { WeatherContext, CityContext } from './context/context';
 import { CityAPI } from './services/CityAPI';
 import { WeatherAPI } from './services/WeatherAPI';
 
@@ -17,4 +17,4 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 			</WeatherContext.Provider>
 		</CityContext.Provider>
 	</React.StrictMode>
-)
+);

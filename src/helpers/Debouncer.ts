@@ -3,13 +3,13 @@ export class Debouncer {
 	time?: number;
 
 	constructor(
-		time?: number,
+		time?: number
 	) {
 		const DEBOUNCE_TIME_DEFAULT = 100;
-		this.time = time || DEBOUNCE_TIME_DEFAULT;
+		this.time = time ?? DEBOUNCE_TIME_DEFAULT;
 	}
 
-	action (action: (data?: any) => void): void {
+	action(action: (data?: any) => any): any {
 		if (this.link != null) {
 			clearTimeout(this.link);
 		}

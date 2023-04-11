@@ -1,6 +1,6 @@
 import { createContext } from 'react';
-import { WeatherAPI } from '../../services/WeatherAPI';
-import { CityAPI } from '../../services/CityAPI';
+import { type WeatherAPI } from '../services/WeatherAPI';
+import { type CityAPI } from '../services/CityAPI';
 
 export const WeatherContext = createContext<WeatherAPI | null>(null);
 

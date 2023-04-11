@@ -12,17 +12,7 @@
 	"overrides": [
 		{
 			"files": "*",
-			"rules": {
-				"indent": [
-					"error",
-					"tab",
-					{
-						"VariableDeclarator": "first",
-						"MemberExpression": 1,
-						"ObjectExpression": 1
-					}
-				]
-			}
+			"rules": {}
 		}
 	],
 	"parserOptions": {
@@ -36,6 +26,25 @@
 		"react"
 	],
 	"rules": {
+		"indent": [
+			"error",
+			"tab",
+			{
+				"VariableDeclarator": "first",
+				"MemberExpression": 1,
+				"ObjectExpression": 1
+			}
+		],
+		"no-tabs": 0,
+		"@typescript-eslint/indent": [
+			"error",
+			"tab",
+			{
+				"VariableDeclarator": "first",
+				"MemberExpression": 1,
+				"ObjectExpression": 1
+			}
+		],
 		"no-multiple-empty-lines": [
 			"error",
 			{
@@ -49,6 +58,12 @@
 			"error",
 			"never"
 		],
-		"@typescript-eslint/indent": 4
+		"semi": ["error", "always"],
+		"@typescript-eslint/semi": ["error", "always"],
+		"no-unexpected-multiline": "error",
+		"@typescript-eslint/strict-boolean-expressions": 0,
+		"@typescript-eslint/consistent-type-definitions": 0,
+		"@typescript-eslint/explicit-function-return-type": 0,
+		"react/prop-types": 0
 	}
 }
