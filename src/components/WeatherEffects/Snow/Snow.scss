@@ -1,0 +1,49 @@
+@use 'sass:math';
+@import '../../../helpers/ScssMixins.scss';
+@import '../../../helpers/Animations.scss';
+
+.x-movement,
+.y-movement,
+.snowflake-wrap {
+	will-change: transform;
+}
+
+.snowflake {
+	$snowflakesCount: 100;
+
+	box-shadow: 0 0 25px white;
+
+	&-wrap {
+		top: -25px;
+
+		@for $snowFlakeIndex from 1 through $snowflakesCount {
+			&:nth-child(#{$snowFlakeIndex}) {
+				left: #{customRandom(1, 99)}vw;
+				opacity: #{math.div(customRandom(1, 100), 100)};
+
+				.snowflake {
+					transform: scale(#{math.div(customRandom(10, 100), 100)});
+				}
+
+				.x-movement {
+					animation: xTranslate_#{$snowFlakeIndex} #{customRandom(10, 15)}s -#{customRandom(0, 15)}s alternate infinite ease-in-out;
+				}
+
+				&.y-movement {
+					animation: yToBottomTranslate #{customRandom(15, 25)}s #{customRandom(1, 100)}s linear infinite;
+				}
+			}
+
+			@keyframes xTranslate_#{$snowFlakeIndex} {
+				$distance: #{customRandom(30, 70)};
+				to {
+					@if random(2) > 1 {
+						transform: translateX(#{$distance}px);
+					} @else {
+						transform: translateX(-#{$distance}px);
+					}
+				}
+			}
+		}
+	}
+}

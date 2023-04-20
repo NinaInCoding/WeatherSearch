@@ -1,0 +1,17 @@
+.visual-effects {
+	&__day {
+		.sky {
+			background: rgb(56 189 248);
+		}
+	}
+	&__night {
+		.sky {
+			background: radial-gradient(ellipse at bottom, rgb(92 119 150) 0%, rgb(8 15 49) 100%);
+		}
+	}
+	&__unset {
+		.sky {
+			background: linear-gradient(-45deg, rgb(8 15 49) 0%, rgb(56 189 248) 50%, rgb(8 15 49) 100%);
+		}
+	}
+}

@@ -1,0 +1,23 @@
+@use 'sass:math';
+
+.raindrop {
+	$drops: 100;
+	$angle: 91deg;
+
+	border: 0.25vmin solid transparent;
+	border-bottom-color: #abc2e9;
+	top: -5vmin;
+	will-change: transform;
+	@for $i from 1 through $drops {
+	  &:nth-child(#{$i}) {
+		opacity: random(90) * 0.01;
+		left: random(1200) * 0.1vw;
+		border-left-width: random(80) * 0.1vmin;
+		animation: fall_#{$i} (random(15) * 0.15s) (random(25) * -0.5s) ease-in infinite;
+	  }
+	  @keyframes fall_#{$i} {
+		#{percentage( math.div(random(50), $drops) )} { transform: rotate(#{$angle}) translateX(0); }
+		to { transform: rotate(#{$angle}) translateX(calc(100vh + 5vmin)); }
+	  }
+	}
+}

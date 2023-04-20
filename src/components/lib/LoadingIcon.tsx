@@ -1,5 +1,5 @@
 type TLoadingIcon = {
-	classes: string
+	classes?: string
 };
 
 export const LoadingIcon: React.FC<TLoadingIcon> = ({ classes }) => {

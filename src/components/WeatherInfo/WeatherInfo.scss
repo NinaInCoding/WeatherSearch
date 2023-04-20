@@ -1,0 +1,7 @@
+.weather-by-location {
+	&__title {
+		background: -webkit-linear-gradient(90deg, #a7a4b5, #52b5d2);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+}

@@ -3,11 +3,12 @@ import { type ISearchHints } from './_types';
 
 export const SearchHints: FC<ISearchHints> = ({ options, onChooseOption }) => (
 	<ul className='search__options
-					my-2'>
+					my-2
+					w-full'>
 		{options?.map(({ name, country, latitude, longitude }, optionIndex) => {
 			const label = `${name}${country ? ', ' + country : ''}`;
 			return (
-				<li key={`${label}${typeof latitude === 'number' ? ('_' + latitude?.toString()) : ''}${typeof longitude === 'number' ? ('_' + longitude?.toString()) : ''}`}
+				<li key={`${latitude ?? optionIndex}_${longitude ?? optionIndex}`}
 					className='search__option
 								cursor-pointer
 								pl-2

@@ -8,6 +8,7 @@ import { GlassIcon } from '../lib/GlassIcon';
 import { LoadingIcon } from '../lib/LoadingIcon';
 import { SearchHints } from '../SearchHints';
 import { FormInput } from '../lib/FormInput/FormInput';
+import './Search.scss';
 
 export const Search: FC<ISearch> = ({
 	location, setLocation
@@ -15,7 +16,7 @@ export const Search: FC<ISearch> = ({
 	const SEARCH_INPUT_PROPS = {
 		maxLength: 200,
 		pattern: /^[^\s][a-zA-Z\s'-]+(?:,\s*[a-zA-Z]{2})?\s*$/,
-		placeholder: 'Type location like this: City<, CountryCode>',
+		placeholder: 'Type: City<, CountryCode>',
 		errorMessage: 'Please enter a location in the format \'City, CountryCode\', where CountryCode is a two-letter code'
 	};
 	const cityManager = useContext(CityContext);
@@ -72,6 +73,8 @@ export const Search: FC<ISearch> = ({
 			if (locationTyped) {
 				try {
 					setLocationOtionsLoading(true);
+					// setTimeout(() => {
+					// }, 3000);
 					// const { name, country } = parseCityString(locationTyped);
 					// const citySuggestions = await cityManager?.getCitySuggestions(name, country);
 					// console.log(citySuggestions);
@@ -112,24 +115,22 @@ export const Search: FC<ISearch> = ({
 
 	return (
 		<div className='search
-						absolute
-						top-1/4
-						left-1/2
-						-translate-x-1/2
-						p-2
-						w-11/12
-						sm:w-8/12
-						transition-all'>
+						mx-auto
+						w-full
+						transition-all
+						opacity-75'>
 			<form onSubmit={onSubmit}
 				className='search__form
 							flex
 							flex-col
+							items-start
+							justify-center
 							w-full
 							rounded-md
 							bg-white'>
 				<div className='search__input-wrap
 								relative
-								flex'>
+								w-full'>
 					<GlassIcon classes={classNames('search__glass-icon absolute left-1 top-1/2 -translate-y-1/2', {
 						'opacity-0': locationOtionsLoading
 					})} />
@@ -146,16 +147,18 @@ export const Search: FC<ISearch> = ({
 						classes='search__input
 								pl-8
 								outline-offset-0
-								text-xl
+								text-xs
+								md:text-base
+								lg:text-xl
 								w-full
 								bg-transparent'
 						errorClasses='absolute
 									top-full
-									left-1/2
-									-translate-x-1/2
+									left-0
 									w-full
-									px-2.5
-									text-center'
+									pt-2.5
+									text-left
+									italic'
 						{...SEARCH_INPUT_PROPS}
 					/>
 					<input className='search__submit hidden' type='submit' disabled={searchDisabled}></input>

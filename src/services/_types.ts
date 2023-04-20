@@ -1,3 +1,5 @@
+import { type Dayjs } from 'dayjs';
+
 export type TCityRaw = {
 	name: string
 	latitude: number
@@ -15,16 +17,16 @@ export type TCity = {
 };
 
 export type TWeatherByLocationRaw = {
-	coord: TCoord
-	weather: TWeatherItem[]
+	coord: TCoordRaw
+	weather: TWeatherItemRaw[]
 	base: 'stations'
-	main: TMain
+	main: TMainRaw
 	visibility: number
-	wind: TWind
-	rain: TRain
-	clouds: TClouds
+	wind: TWindRaw
+	rain: TRainRaw
+	clouds: TCloudsRaw
 	dt: number
-	sys: TSys
+	sys: TSysRaw
 	timezone: number
 	id: number
 	name: string
@@ -32,68 +34,56 @@ export type TWeatherByLocationRaw = {
 };
 
 export type TWeatherByLocation = {
-	//   TCoord: {
-	//     lon: 10.99
-	//     lat: 44.34
-	//   },
-	//   weather: [
-	//     {
-	//       id: 501,
-	//       TMain: Rain,
-	//       description: moderate TRain,
-	//       icon: 10d
-	//     }
-	//   ],
-	//   base: stations,
+	coord: TCoord
+	weather: TWeatherItemParsed[]
 	main: {
 		temp: number
-		// feels_like: 298.74,
-		temp_min: number
-		temp_max: number
-		// pressure: 1015,
-		// humidity: 64,
-		// sea_level: 1015,
-		// grnd_level: 933
+		pressure: number
+		humidity: number
 	}
-	//   visibility: 10000,
 	wind: {
 		speed: number
-		// deg: 349,
-		// gust: 1.18
 	}
-	//   TRain: {
-	//     1h: 3.16
-	//   },
-	//   TClouds: {
-	//     all: 100
-	//   },
-	//   dt: 1661870592,
-	//   TSys: {
-	//     type: 2,
-	//     id: 2075663,
-	//     country: IT,
-	//     sunrise: 1661834187,
-	//     sunset: 1661882248
-	//   },
-	//   timezone: 7200,
-	//   id: 3163858,
-	// name: string,
-	// cod: number
+	sys: TSys
+	timezone: number
 };
 
-type TCoord = {
+export type TWeatherItem = {
+	id: number
+	main: string
+	description: string
+};
+
+export type TWeatherItemParsed = {
+	id: number
+	weatherId: EWeatherId | undefined
+	main: string
+	description: string
+};
+
+export type TSys = {
+	sunrise: Dayjs
+	sunset: Dayjs
+};
+
+export type TCoord = {
 	lon: number
 	lat: number
 };
 
-type TWeatherItem = {
+type TCoordRaw = {
+	lon: number
+	lat: number
+};
+
+type TWeatherItemRaw = {
 	id: number
 	main: string
 	description: string
 	icon: string
 };
 
-type TMain = {
+type TMainRaw = {
 	temp: number
 	feels_like: number
 	temp_min: number
@@ -104,24 +94,34 @@ type TMain = {
 	grnd_level: number
 };
 
-type TWind = {
+type TWindRaw = {
 	speed: number
 	deg: number
 	gust: number
 };
 
-type TRain = {
+type TRainRaw = {
 	'1h': number
 };
 
-type TClouds = {
+type TCloudsRaw = {
 	all: number
 };
 
-type TSys = {
+type TSysRaw = {
 	type: number
 	id: number
 	country: string
 	sunrise: number
 	sunset: number
+};
+
+export enum EWeatherId {
+	THUNDERSTORM = 2,
+	DRIZZLE = 3,
+	RAIN = 5,
+	SNOW = 6,
+	ATMOSPHERE = 7,
+	CLEAR = 800,
+	CLOUDS = 80,
 };

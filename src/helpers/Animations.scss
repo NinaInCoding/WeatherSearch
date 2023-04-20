@@ -1,0 +1,20 @@
+@keyframes centeredRotate { 
+	0% { transform: translate3d(-50%, -50%, 0) rotate(0deg); }
+	100% { transform: translate3d(-50%, -50%, 0) rotate(360deg); }
+}
+
+@keyframes yToBottomTranslate {
+	to { transform: translateY(calc(100vh + 50px));}
+}
+
+
+@keyframes lightning {
+	50% { 
+			background: 
+				radial-gradient(circle at calc(50% - 10vw) -20%, #fff4, #fff0 20%),
+				linear-gradient(180deg, #fff9, #fff3); 
+		}
+}
+
+// animation: lightning 0.1s linear 0s 2, lightning 0.15s ease-out 0.25s 1;
+// transition: all 0.5s ease 0s;

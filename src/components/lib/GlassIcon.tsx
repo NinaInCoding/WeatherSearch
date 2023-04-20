@@ -1,5 +1,5 @@
 type TGlassIcon = {
-	classes: string
+	classes?: string
 };
 
 export const GlassIcon: React.FC<TGlassIcon> = ({ classes }) => {

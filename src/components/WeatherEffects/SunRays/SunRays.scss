@@ -1,0 +1,24 @@
+@use 'sass:math';
+@import '../../../helpers/ScssMixins.scss';
+@import '../../../helpers/Animations.scss';
+
+.sun {
+	box-shadow: 0px 0px 40px 15px rgb(254, 243, 199);
+}
+
+.ray {
+	$raysCount: 10;
+	top: 50%;
+	left: 50%;
+	background: radial-gradient(50% 50% at 50% 50%, rgb(238 235 225 / 75%) 0%, rgba(253, 230, 138, 0));
+	will-change: transform;
+
+	@for $rayInd from 1 through $raysCount {
+		&:nth-of-type(#{$rayInd}) {
+			width: #{customRandom(30, 60)}px;
+			height: #{customRandom(250, 550)}px;
+			opacity: #{math.div(customRandom(10, 20), 100)};
+			animation: centeredRotate #{customRandom(50, 80)}s -#{customRandom(0, 80)}s linear infinite;
+		}
+	}
+}

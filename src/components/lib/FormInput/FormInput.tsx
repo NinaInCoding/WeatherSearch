@@ -2,6 +2,7 @@ import { type FC, useState, useRef, useEffect } from 'react';
 import { type TFormInput, EFormInputLabelPosition } from './_types';
 import classNames from 'classnames';
 import { ErrorMessage } from '../ErrorMessage';
+import './FormInput.css';
 
 export const FormInput: FC<TFormInput> = ({
 	classes, errorClasses, label, errorMessage, pattern, handleChange, handleFocus, handleBlur, handleValidityChange, ...inputProps
