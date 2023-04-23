@@ -19,7 +19,9 @@ export const SunRays = () => {
 				[...Array(SUN_RAYS_COUNT).keys()].map((ray, rayIndex) => (
 					<div key={`${rayIndex}`}
 						className='ray
-									absolute' />
+									absolute
+									top-1/2
+									left-1/2' />
 				))
 			}
 		</div>

@@ -3,11 +3,11 @@
 .raindrop {
 	$drops: 100;
 	$angle: 91deg;
-
 	border: 0.25vmin solid transparent;
 	border-bottom-color: #abc2e9;
 	top: -5vmin;
 	will-change: transform;
+
 	@for $i from 1 through $drops {
 	  &:nth-child(#{$i}) {
 		opacity: random(90) * 0.01;

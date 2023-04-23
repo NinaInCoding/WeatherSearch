@@ -33,8 +33,6 @@ export const WeatherEffects: FC<IVisualEffects> = ({ coord, sys, weather }) => {
 		case [EWeatherId.SNOW].includes(id):
 			return <Snow />;
 		case ![EWeatherId.SNOW, EWeatherId.DRIZZLE, EWeatherId.RAIN, EWeatherId.THUNDERSTORM, EWeatherId.ATMOSPHERE].includes(id):
-			console.log(timePeriod === ETimePeriod.DAY);
-
 			return timePeriod === ETimePeriod.DAY ? <SunRays /> : null;
 		default:
 			return null;
@@ -49,9 +47,9 @@ export const WeatherEffects: FC<IVisualEffects> = ({ coord, sys, weather }) => {
 		));
 	}, [coord?.lat, coord?.lon]);
 
-	// + pointer-events-none
 	return (
 		<div className={classNames('visual-effects',
+			'pointer-events-none',
 			'overflow-hidden',
 			'absolute',
 			'top-0',

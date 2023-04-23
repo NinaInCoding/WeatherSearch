@@ -1,7 +1,8 @@
 import { type FC } from 'react';
 import { type IWeatherInfo } from './_types';
-import './WeatherInfo.scss';
 import { formatTime } from '../../helpers/Time';
+
+import './WeatherInfo.scss';
 
 export const WeatherInfo: FC<IWeatherInfo> = ({ location, weather }) => {
 	const sunriseTime = formatTime(weather.sys.sunrise);
@@ -28,6 +29,12 @@ export const WeatherInfo: FC<IWeatherInfo> = ({ location, weather }) => {
 				<p className='weather-by-location__tempurature'>
 					<span>{`${weather.main.temp}`}</span>&#x2103;
 				</p>
+				<p className='weather-by-location__wind'>
+					<span>{`Wind speed: ${weather.wind.speed} meter/sec`}</span>
+				</p>
+				<p className='weather-by-location__humidity'>
+					<span>{`Humidity: ${weather.main.humidity} %`}</span>
+				</p>
 				<div className='flex
 								justify-between'>
 					<p>{`Sunrise: ${sunriseTime}`}</p>
@@ -42,14 +49,6 @@ export const WeatherInfo: FC<IWeatherInfo> = ({ location, weather }) => {
 							lg:text-4xl'>
 				{`${location.name}${location.country ? (', ' + location.country) : ''}`}
 			</h1>
-
-			{/* <p>{`Temperature: ${weather.main.temp}`}</p>0 - n  Celsius
-			<p>{`Atmospheric pressure: ${weather.main.pressure}`}</p> hPa
-			<p>{`Humidity: ${weather.main.humidity}`}</p>%
-			<p>{`Wind speed: ${weather.wind.speed}`}</p>0 - n  meter/sec
-
-			<p>{`Sunrise time, unix, UTC: ${weather.sys.sunrise}`}</p>unix, UTC
-			<p>{`Sunset time, unix, UTC: ${weather.sys.sunset}`}</p>unix, UTC */}
 		</div>
 	);
 };

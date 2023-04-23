@@ -2,7 +2,6 @@ import { type FC, useState, useRef, useEffect } from 'react';
 import { type TFormInput, EFormInputLabelPosition } from './_types';
 import classNames from 'classnames';
 import { ErrorMessage } from '../ErrorMessage';
-import './FormInput.css';
 
 export const FormInput: FC<TFormInput> = ({
 	classes, errorClasses, label, errorMessage, pattern, handleChange, handleFocus, handleBlur, handleValidityChange, ...inputProps
@@ -11,11 +10,11 @@ export const FormInput: FC<TFormInput> = ({
 	const [isValid, setIsValid] = useState<boolean>(true);
 	const [focused, setFocused] = useState(false);
 
-	if (handleValidityChange) {
-		useEffect(() => {
+	useEffect(() => {
+		if (handleValidityChange) {
 			handleValidityChange(isValid);
-		}, [isValid]);
-	}
+		}
+	}, [isValid]);
 
 	const innerHandleChange = (event: React.FormEvent) => {
 		if (pattern) {
@@ -37,7 +36,7 @@ export const FormInput: FC<TFormInput> = ({
 			onChange={innerHandleChange}
 			onBlur={innerHandleBlur}
 			onFocus={handleFocus}
-			className={classNames('input', classes, {
+			className={classNames('input', 'outline-0', classes, {
 				focused
 			})}
 			{...inputProps}

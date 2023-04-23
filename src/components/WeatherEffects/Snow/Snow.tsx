@@ -6,7 +6,7 @@ export const Snow = () => {
 	return (
 		<>
 			{
-				[...Array(SNOWFLAKES_COUNT).keys()].map((snowflake, snowflakeIndex) => (
+				[...Array(SNOWFLAKES_COUNT).keys()].map((_, snowflakeIndex) => (
 					<div key={`${snowflakeIndex}`}
 						className='snowflake-wrap
 									absolute
