@@ -1,5 +1,7 @@
 # Basic Weather Search Demo
 
+url https://preeminent-quokka-b2a111.netlify.app/
+
 ## Build
 
 Clone repository
