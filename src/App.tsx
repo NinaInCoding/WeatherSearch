@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Search } from './components/Search';
 import { WeatherInfo } from './components/WeatherInfo';
-import { Debouncer } from './helpers/Debouncer';
 import { WeatherContext } from './context/context';
 import { type TCity, type TWeatherByLocation } from './services/_types';
 import { WeatherEffects } from './components/WeatherEffects';
@@ -13,21 +12,23 @@ function App(): React.ReactElement {
 	const weatherManager = useContext(WeatherContext);
 	const [location, setLocation] = useState<TCity>();
 	const [weatherByLocation, setWatherByLocation] = useState<TWeatherByLocation>();
-
-	const debouncer = new Debouncer();
+	const debouncerRef = useRef<any>(null);
 
 	useEffect(() => {
-		debouncer.action(async() => {
-			if (location) {
-				try {
-					const { name, country } = location;
-					const weather = await weatherManager?.getWeatherByLocation(name, undefined, country);
-					setWatherByLocation(weather);
-				} catch (error) {
-					console.error(error);
+		if (debouncerRef) {
+			clearTimeout(debouncerRef.current);
+			debouncerRef.current = setTimeout(async() => {
+				if (location) {
+					try {
+						const { name, country } = location;
+						const weather = await weatherManager?.getWeatherByLocation(name, undefined, country);
+						setWatherByLocation(weather);
+					} catch (error) {
+						console.error(error);
+					}
 				}
-			}
-		});
+			}, 1000);
+		}
 	}, [location]);
 
 	return (

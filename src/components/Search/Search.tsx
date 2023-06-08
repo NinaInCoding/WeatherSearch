@@ -1,7 +1,6 @@
-import { useState, useEffect, type FC, useContext } from 'react';
+import { useState, useEffect, type FC, useContext, useRef } from 'react';
 import classNames from 'classnames';
 import { type ISearch } from './_types';
-import { Debouncer } from '../../helpers/Debouncer';
 import { type TCity } from '../../services/_types';
 import { CityContext } from '../../context/context';
 import { GlassIcon } from '../icons/GlassIcon';
@@ -24,7 +23,7 @@ export const Search: FC<ISearch> = ({
 	const [locationTyped, setLocationTyped] = useState<string>('');
 	const [locationOtions, setLocationOtions] = useState<TCity[]>();
 	const [locationOtionsLoading, setLocationOtionsLoading] = useState<boolean>(false);
-	const debouncer = new Debouncer(1000);
+	const debouncerRef = useRef<any>(null);
 
 	const parseCityString = (typed: string): TCity => {
 		const dataTyped = typed.split(',').map(word => word.trim());
@@ -37,24 +36,28 @@ export const Search: FC<ISearch> = ({
 		setLocationOtions(undefined);
 	};
 
+	const getCities = async() => {
+		try {
+			setLocationOtionsLoading(true);
+			const { name, country } = parseCityString(locationTyped);
+			const citySuggestions = await cityManager?.getCitySuggestions(name, country);
+			setLocationOtions(citySuggestions);
+		} catch (error) {
+			console.error(error);
+		} finally {
+			setLocationOtionsLoading(false);
+		}
+	};
+
 	useEffect(() => {
-		debouncer.action(async() => {
-			if (locationTyped) {
-				try {
-					setLocationOtionsLoading(true);
-					const { name, country } = parseCityString(locationTyped);
-					const citySuggestions = await cityManager?.getCitySuggestions(name, country);
-					setLocationOtions(citySuggestions);
-				} catch (error) {
-					console.error(error);
-				} finally {
-					setLocationOtionsLoading(false);
-				}
-			} else {
-				setLocationOtions(undefined);
+		if (locationTyped?.length > 1 && locationTyped.match(SEARCH_INPUT_PROPS.pattern)) {
+			if (debouncerRef) {
+				clearTimeout(debouncerRef.current);
+				debouncerRef.current = setTimeout(getCities, 1000);
 			}
-		});
-		setSearchDisabled(false);
+		} else {
+			setLocationOtions(undefined);
+		}
 	}, [locationTyped]);
 
 	const onChangeTypingArea = (event: React.FormEvent<HTMLInputElement>) => {
